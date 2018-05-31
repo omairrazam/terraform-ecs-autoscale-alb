@@ -11,6 +11,7 @@ variable "az_count" {
 variable "availability_zones" {
   description = "Availability zones by region"
   default = {
-    "ap-southeast-2" = "ap-southeast-2a,ap-southeast-2b,ap-southeast-2c"
+      "us-east-1" = "us-east-1a,us-east-1b,us-east-1c"
+
   }
 }

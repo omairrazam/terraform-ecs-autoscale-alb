@@ -17,7 +17,8 @@ resource "aws_launch_configuration" "ecs_instance" {
   iam_instance_profile = "${var.instance_profile_name}"
   security_groups = ["${var.security_group_ecs_instance_id}"]
   image_id = "${var.ami}"
-  user_data = "${data.template_file.user_data.rendered}"
+  #user_data = "${data.template_file.user_data.rendered}"
+  user_data  = "#!/bin/bash\necho 'ECS_CLUSTER=${var.cluster_name}' > /etc/ecs/ecs.config\nstart ecs"
 
   # Important note: whenever using a launch configuration with an auto scaling
   # group, you must set create_before_destroy = true. However, as soon as you

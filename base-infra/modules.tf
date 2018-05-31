@@ -22,7 +22,7 @@ module "bastion" {
   source = "./modules/bastion"
 
   instance_type = "${var.bastion_instance_type}"
-  key_pair_name = "${var.bastion_key_pair_name}"
+  key_pair_name = "${aws_key_pair.bastion_keypair.key_name}"
   security_group_internal_id = "${module.security.internal_id}"
   security_group_ssh_id = "${module.security.ssh_id}"
   ami = "${lookup(var.bastion_ami, var.region)}"
@@ -55,7 +55,7 @@ module "ecs_instances" {
   dd_agent_task_name = "${module.ecs_cluster.dd_agent_task_name}"
   hello_world_task_name = "${module.ecs_cluster.hello_world_task_name}"
   instance_type = "${var.instance_type}"
-  key_pair_name = "${var.key_pair_name}"
+  key_pair_name = "${aws_key_pair.ec2_keypair.key_name}"
   instance_profile_name = "${module.security.ecs_instance_profile_name}"
   security_group_ecs_instance_id = "${module.security.internal_id}"
   ami = "${lookup(var.ami, var.region)}"

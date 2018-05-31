@@ -33,7 +33,8 @@ resource "aws_security_group" "ssh" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["${var.ssh_allowed_ip}/32"]
+    #cidr_blocks = ["${var.ssh_allowed_ip}/32"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -48,11 +49,11 @@ resource "aws_security_group" "ssh" {
   }
 }
 
-# Security group allowing inbound HTTPS from anywhere
+# Security group allowing inbound All HTTP/HTTPS from anywhere
 resource "aws_security_group" "inbound" {
   vpc_id = "${var.vpc_id}"
   name = "inbound"
-  description = "Allow inbound HTTPS traffic"
+  description = "Allow inbound All traffic"
 
   ingress {
     from_port = 443
@@ -60,6 +61,14 @@ resource "aws_security_group" "inbound" {
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  ingress {
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
 
   egress {
     from_port = 0

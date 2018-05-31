@@ -51,12 +51,12 @@ variable "ami" {
 
 variable "asg_min" {
   description = "Minimum number of EC2 instances to run in the ECS cluster"
-  default = 3
+  default = 1
 }
 
 variable "asg_max" {
   description = "Maximum number of EC2 instances to run in the ECS cluster"
-  default = 9
+  default = 1
 }
 
 variable "bastion_instance_type" {
